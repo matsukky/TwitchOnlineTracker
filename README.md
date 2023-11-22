@@ -2,23 +2,29 @@
 
 ## Quickstart
 
-Install: `npm install --save twitchonlinetracker`
+Install: `npm install --save @matsukky/twitchtracker`
 
-Get a Client ID. See Step 1 of the [Twitch API Introduction](https://dev.twitch.tv/docs/api/#introduction) on how to do this.
+Get a Client ID & Client Secret. See Step 1 of the [Twitch API Introduction](https://dev.twitch.tv/docs/api/#introduction) on how to do this.
 
 ```js
-const { TwitchOnlineTracker } = require('twitchonlinetracker')
+const { TwitchOnlineTracker } = require('@matsukky/twitchtracker')
 const tracker = new TwitchOnlineTracker({
   client_id: "your twitch app client id", // used for api requests
+  client_secret: "your twitch app client secret", // used for connect to the api
   track: ['channel1', 'channel2'], // all the channels you want to track
   pollInterval: 30, // how often in between polls in seconds. default 30
-  debug: true, // whether to debug to console
-  start: true // whether to start immediately. if you don't use this, you must call .start() later
+  debug: false, // whether to debug to console
+  start: true // whether to start immediately. if you don't use this, you must call.
 })
 
 // Listen to live event, it returns StreamData
 tracker.on('live', streamData => {
   console.log(`${streamData.user_name} just went live!`)
+})
+
+// Listen to live end, only returns channel name
+tracker.on('offline', function (channel) {
+  console.log(`${channel} has gone offline.`)
 })
 
 // Make sure you listen for errors
@@ -29,11 +35,12 @@ tracker.on('error', error => console.error)
 
 ## TwitchOnlineTracker API
 
-### const tracker = new TwitchOnlineTracker(options: [TwitchOnlineTrackerOptions](https://github.com/megadrive/TwitchOnlineTracker/blob/949212b7834f0df11c0309dc85559836d57f364c/src/interfaces.ts#L66-L72))
+### const tracker = new TwitchOnlineTracker(options: [TwitchOnlineTrackerOptions]())
 
 Create a new `TwitchOnlineTracker` instance. It takes a TwitchOnlineTrackerOptions interface:
 
 - `client_id` *string* **required** Your Twitch app's client id
+- `client_secret` *string* **required** Your Twitch app's client secret
 - `track` *string[]* An array of the channels you wish to track on startup
 - `pollInterval` *number* The amount of time in seconds between polls
 - `debug` *boolean* If true, output debug information to console
@@ -55,7 +62,7 @@ Adds more streams to track. `usernamesToTrack` expects an array of strings.
 
 Stops tracking streams. `usernamesToTrack` expects an array of strings.
 
-### tracker.on('live', function (streamData: [StreamData](https://github.com/megadrive/TwitchOnlineTracker/blob/12505f0bfe16129d4a125c93a021c41510db452c/src/interfaces.ts#L36-L48)) { })
+### tracker.on('live', function (streamData: [StreamData]()) { })
 
 When a stream is found to be live, fires this event. The callback function provides a StreamData parameter.
 

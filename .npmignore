@@ -1,4 +1,6 @@
 .env
 README.md
 .vscode/
+.github/
 src/
+index.test.js

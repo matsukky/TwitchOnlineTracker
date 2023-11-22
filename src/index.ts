@@ -79,11 +79,24 @@ export class TwitchOnlineTracker extends EventEmitter {
    */
   async api (endpoint: string) {
     try {
+      const responseToken = await axios("https://id.twitch.tv/oauth2/token", {
+        method: 'POST',
+        data: {
+          client_id: this.options.client_id,
+          client_secret: this.options.client_secret,
+          grant_type: 'client_credentials',
+        },
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      if(!responseToken?.data?.access_token) throw new Error("Token isn't available")
       const twitchApiBase: string = 'https://api.twitch.tv/helix/'
       this.log(`making a request: ${twitchApiBase}${endpoint}`)
       const response = await axios(twitchApiBase + endpoint, {
         headers: {
-          'Client-ID': this.options.client_id
+          'Client-Id': this.options.client_id,
+          Authorization: `Bearer ${responseToken.data.access_token}`
         }
       })
       let rv = {}

@@ -2,11 +2,10 @@
     "compilerOptions": {
         "allowJs": false,
         "declaration": true,
-        "lib": [ "es2015" ],
-        "module": "commonjs",
+        "lib": [ "es2022" ],
+        "module": "CommonJS",
         "outDir": "./lib",
-        "resolveJsonModule": true,
-        "target": "es5",
+        "target": "es2022",
         "types": ["node"]
     },
     "include": [

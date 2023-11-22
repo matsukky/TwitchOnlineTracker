@@ -7,9 +7,12 @@ const tracker = new TwitchOnlineTracker({
     client_secret: process.env.CLIENT_SECRET,
     track: process.env.STREAMS.split(','),
     pollInterval: 30,
-    debug: false,
+    debug: true,
     start: true
   })
+
+  tracker.track(["matsukkky"])
+  tracker.untrack()
 
   tracker.on('live', streamData => {
     console.log(streamData)

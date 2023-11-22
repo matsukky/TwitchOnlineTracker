@@ -191,11 +191,24 @@ export class TwitchOnlineTracker extends EventEmitter {
    * @param {string[]} loginNames An array of login names of streamers
    * @memberof TwitchOnlineTracker
    */
-  untrack (loginNames: string[]) {
-    this.log(`untracking ${loginNames.join(', ')}`)
-    loginNames.forEach(login => {
-      this.tracked.delete(login.toLowerCase())
-    })
+  untrack (loginNames: any) {
+    this.tracked.values
+    if(!loginNames){
+      this.log(`untracking ${Array.from(this.tracked).join(', ')}`)
+      this.tracked.forEach(login => {
+        this.tracked.delete(login.toLowerCase())
+      })
+    }
+    else if(JSON.stringify(loginNames) == JSON.stringify([])){
+      this.log(`try to untracking nothing`)
+    }
+    else {
+      this.log(`untracking ${loginNames.join(', ')}`)
+      loginNames.forEach(login => {
+        this.tracked.delete(login.toLowerCase())
+      })
+    }
+    
   }
 
   /**

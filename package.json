@@ -1,6 +1,6 @@
 {
   "name": "@matsukky/twitchtracker",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "A library to help track streamers and fires an event if they go online or offline.",
   "main": "lib/",
   "types": "lib/*.d.ts",

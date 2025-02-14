@@ -1,9 +1,9 @@
 {
   "name": "@matsukky/twitchtracker",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "A library to help track streamers and fires an event if they go online or offline.",
-  "main": "lib/",
-  "types": "lib/*.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "directories": {
     "lib": "lib"
   },
@@ -23,12 +23,12 @@
   "author": "matsukky",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.6.2"
+    "axios": "^1.7.9"
   },
   "devDependencies": {
-    "@types/dotenv": "^8.2.0",
-    "dotenv": "^16.3.1",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.3.2"
+    "@types/dotenv": "^8.2.3",
+    "dotenv": "^16.4.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   }
 }

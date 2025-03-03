@@ -2,7 +2,7 @@
 
 import * as dotenv from 'dotenv'
 import axios from 'axios'
-import * as EventEmitter from 'events'
+import { EventEmitter } from 'events';
 
 import {
   UserData,
@@ -267,7 +267,7 @@ export class TwitchOnlineTracker extends EventEmitter {
 
         if (stopped.length) {
           this.log(`${stopped.length} stopped streams`)
-          stopped.forEach(stoppedStream => this._offline(stoppedStream.user_name))
+          stopped.forEach(stoppedStream => this._offline(stoppedStream))
         }
 
         this._cachedStreamData = streamRequestData.data
@@ -301,14 +301,13 @@ export class TwitchOnlineTracker extends EventEmitter {
   /**
    * Emit an event when a stream stops
    * @fires TwitchOnlineTracker#offline
-   * @param {string} channelName the channel name of the stream that has stopped
    * @memberof TwitchOnlineTracker
    */
-  _offline (channelName: string) {
+  _offline (streamData: StreamData) {
     /**
      * @event TwitchOnlineTracker#offline
      * @param {string} The stream that has stopped
      */
-    this.emit('offline', channelName)
+    this.emit('offline', streamData)
   }
 }

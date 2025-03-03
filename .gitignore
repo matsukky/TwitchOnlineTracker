@@ -127,3 +127,4 @@ $RECYCLE.BIN/
 
 *.env
 lib/
+index.ts

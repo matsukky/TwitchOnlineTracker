@@ -19,13 +19,13 @@ jobs:
           bun-version: latest
       - run: bun install
       - run: bun run build
-      - run: cp package.json dist/
-      - run: cp README.md dist/
+      - run: cp package.json lib/
+      - run: cp README.md lib/
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
-          path: ./dist
+          path: ./lib
 
   publish-npm:
     if: contains(github.event.head_commit.message, 'publish npm')
@@ -42,6 +42,6 @@ jobs:
         with:
           name: build-artifacts
           path: ./lib
-      - run: cd dist && npm publish --provenance --access public
+      - run: cd lib && npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
